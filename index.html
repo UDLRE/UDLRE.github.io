@@ -342,16 +342,17 @@
 
 <div class="compare-wrap" id="compare1">
   <div class="compare-stage">
-    <img class="compare-img compare-img-base" src="./static/images/490/input.png" alt="Base">
+    <img class="compare-img compare-img-base" src="./static/images/000/00000000.png" alt="Input">
+
     <div class="compare-overlay">
-      <img class="compare-img" src="./static/images/490/Ours.png" alt="SR">
+      <img class="compare-img" src="./static/images/000/00000000_MAX_4.png" alt="Result">
     </div>
 
     <div class="compare-divider"></div>
     <div class="compare-handle" aria-hidden="true"></div>
 
-    <div class="compare-badge compare-badge-left">LLLR</div>
-    <div class="compare-badge compare-badge-right">NLHR</div>
+    <div class="compare-badge compare-badge-left">Input</div>
+    <div class="compare-badge compare-badge-right">Result</div>
   </div>
 </div>
 
@@ -379,8 +380,9 @@
     width: 100%;
     height: 100%;
     object-fit: contain;
-    user-select: none;
+    object-position: center center;
     pointer-events: none;
+    user-select: none;
   }
 
   .compare-img-base {
@@ -396,8 +398,7 @@
   }
 
   .compare-overlay .compare-img {
-    width: 100%;
-    height: 100%;
+    inset: 0;
   }
 
   .compare-divider {
@@ -479,26 +480,30 @@
     const handle = wrap.querySelector(".compare-handle");
 
     let dragging = false;
+    let pos = 50;
 
-    function setPosition(clientX) {
+    function update(percent) {
+      pos = Math.max(0, Math.min(100, percent));
+      overlay.style.width = pos + "%";
+      divider.style.left = pos + "%";
+      handle.style.left = pos + "%";
+    }
+
+    function setFromClientX(clientX) {
       const rect = stage.getBoundingClientRect();
-      let percent = ((clientX - rect.left) / rect.width) * 100;
-      percent = Math.max(0, Math.min(100, percent));
-
-      overlay.style.width = percent + "%";
-      divider.style.left = percent + "%";
-      handle.style.left = percent + "%";
+      const percent = ((clientX - rect.left) / rect.width) * 100;
+      update(percent);
     }
 
     stage.addEventListener("pointerdown", (e) => {
       dragging = true;
       stage.setPointerCapture(e.pointerId);
-      setPosition(e.clientX);
+      setFromClientX(e.clientX);
     });
 
     stage.addEventListener("pointermove", (e) => {
       if (!dragging) return;
-      setPosition(e.clientX);
+      setFromClientX(e.clientX);
     });
 
     stage.addEventListener("pointerup", () => {
@@ -509,11 +514,7 @@
       dragging = false;
     });
 
-    stage.addEventListener("pointerleave", () => {
-      dragging = false;
-    });
-
-    setPosition(stage.getBoundingClientRect().left + stage.getBoundingClientRect().width / 2);
+    update(50);
   })();
 </script>
     
