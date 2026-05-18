@@ -346,6 +346,7 @@
 
   <div class="methods-compare-wrap">
     <div class="methods-compare">
+      <!-- ================= ROW 1 ================= -->
       <!-- Left: Ours -->
       <div class="methods-col">
         <div class="method-card">
@@ -362,12 +363,9 @@
       <!-- Right: Comparison methods -->
       <div class="methods-col">
         <div class="method-card">
-      
           <div class="method-name">Comparison Methods</div>
-      
           <div class="compare-stage" id="comp1" style="--split:50%;">
-      
-            <select id="compMethodSelect" class="method-select">
+            <select id="compMethodSelect1" class="method-select">
               <option value="SCI_HAT">SCI_HAT</option>
               <option value="SwinIR_KinD">SwinIR_KinD</option>
               <option value="HAT_KinD">HAT_KinD</option>
@@ -379,22 +377,53 @@
               <option value="OneRestore">OneRestore</option>
               <option value="MoCEIR">MoCEIR</option>
             </select>
-      
-            <img class="compare-img compare-input"
-                 src="./static/images/490/input.png"
-                 alt="Input">
-      
-            <img class="compare-img compare-result"
-                 id="compResultImg"
-                 src="./static/images/490/MoCEIR.png"
-                 alt="Comparison">
-      
+            <img class="compare-img compare-input" src="./static/images/490/input.png" alt="Input">
+            <img class="compare-img compare-result" id="compResultImg1" src="./static/images/490/MoCEIR.png" alt="Comparison">
             <div class="compare-divider"></div>
             <div class="compare-handle" aria-hidden="true"></div>
-      
           </div>
         </div>
       </div>
+
+      <!-- ================= ROW 2 ================= -->
+      <!-- Left: Ours (807) -->
+      <div class="methods-col">
+        <div class="method-card">
+          <div class="method-name">Ours Methods</div>
+          <div class="compare-stage" id="ours2" style="--split:50%;">
+            <img class="compare-img compare-input" src="./static/images/807/input.png" alt="Input">
+            <img class="compare-img compare-result" src="./static/images/807/Ours.png" alt="Ours">
+            <div class="compare-divider"></div>
+            <div class="compare-handle" aria-hidden="true"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Comparison methods (807) -->
+      <div class="methods-col">
+        <div class="method-card">
+          <div class="method-name">Comparison Methods</div>
+          <div class="compare-stage" id="comp2" style="--split:50%;">
+            <select id="compMethodSelect2" class="method-select">
+              <option value="SCI_HAT">SCI_HAT</option>
+              <option value="SwinIR_KinD">SwinIR_KinD</option>
+              <option value="HAT_KinD">HAT_KinD</option>
+              <option value="MaIR">MaIR</option>
+              <option value="MambaIRv2">MambaIRv2</option>
+              <option value="DRAT">DRAT</option>\
+              <option value="PromptIR">PromptIR</option>
+              <option value="AdaIR">AdaIR</option>
+              <option value="OneRestore">OneRestore</option>
+              <option value="MoCEIR">MoCEIR</option>
+            </select>
+            <img class="compare-img compare-input" src="./static/images/807/input.png" alt="Input">
+            <img class="compare-img compare-result" id="compResultImg2" src="./static/images/807/MoCEIR.png" alt="Comparison">
+            <div class="compare-divider"></div>
+            <div class="compare-handle" aria-hidden="true"></div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -449,31 +478,25 @@
   }
 
   .method-select {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  z-index: 10;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 10;
+    min-width: 135px;
+    padding: 6px 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.25);
+    background: rgba(20, 20, 20, 0.72);
+    backdrop-filter: blur(6px);
+    color: #fff;
+    font-size: 13px;
+    outline: none;
+  }
 
-  min-width: 135px;
-
-  padding: 6px 10px;
-
-  border-radius: 10px;
-  border: 1px solid rgba(255,255,255,0.25);
-
-  background: rgba(20, 20, 20, 0.72);
-  backdrop-filter: blur(6px);
-
-  color: #fff;
-  font-size: 13px;
-
-  outline: none;
-}
-
-.method-select option {
-  background: #222;
-  color: #fff;
-}
+  .method-select option {
+    background: #222;
+    color: #fff;
+  }
 
   .compare-stage {
     position: relative;
@@ -524,21 +547,14 @@
     position: absolute;
     top: 50%;
     left: var(--split);
-  
     width: 34px;
     height: 34px;
-  
     transform: translate(-50%, -50%);
     border-radius: 50%;
-  
     background: rgba(255, 255, 255, 0.96);
-  
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
-  
     z-index: 4;
-  
     cursor: ew-resize;
-  
     pointer-events: auto;
   }
 
@@ -588,25 +604,21 @@
 <script>
   function bindCompare(id) {
     const stage = document.getElementById(id);
+    if (!stage) return;
     const handle = stage.querySelector(".compare-handle");
 
     let dragging = false;
 
     function update(clientX) {
       const rect = stage.getBoundingClientRect();
-
       let percent = ((clientX - rect.left) / rect.width) * 100;
       percent = Math.max(0, Math.min(100, percent));
-
       stage.style.setProperty("--split", percent + "%");
     }
 
-    /* 只有拖动圆球才会触发 */
     handle.addEventListener("pointerdown", (e) => {
       dragging = true;
-
       handle.setPointerCapture(e.pointerId);
-
       e.stopPropagation();
       e.preventDefault();
     });
@@ -625,59 +637,40 @@
     });
   }
 
-  ["ours1", "comp1"].forEach(bindCompare);
+  // 绑定两行，共 4 个滑动对比模块
+  ["ours1", "comp1", "ours2", "comp2"].forEach(bindCompare);
 
   const methods = {
-    AdaIR: {
-      name: "AdaIR",
-      img: "./static/images/490/AdaIR.png"
-    },
-    DRAT: {
-      name: "DRAT",
-      img: "./static/images/490/DART.png"
-    },
-    SCI_HAT: {
-      name: "SCI_HAT",
-      img: "./static/images/490/SCI_HAT.png"
-    },
-    SwinIR_KinD: {
-      name: "SwinIR_KinD",
-      img: "./static/images/490/SwinIR_KinD.png"
-    },
-    HAT_KinD: {
-      name: "HAT_KinD",
-      img: "./static/images/490/HAT_KinD.png"
-    },
-    MaIR: {
-      name: "MaIR",
-      img: "./static/images/490/MaIR.png"
-    },
-    MambaIRv2: {
-      name: "MambaIRv2",
-      img: "./static/images/490/Mambairv2.png"
-    },
-    PromptIR: {
-      name: "PromptIR",
-      img: "./static/images/490/PromptIR.png"
-    },
-    OneRestore: {
-      name: "OneRestore",
-      img: "./static/images/490/OneRestore.png"
-    },
-    MoCEIR: {
-      name: "MoCEIR",
-      img: "./static/images/490/MoCEIR.png"
-    },
+    AdaIR: { name: "AdaIR", img: "./static/images/490/AdaIR.png" },
+    DRAT: { name: "DRAT", img: "./static/images/490/DART.png" },
+    SCI_HAT: { name: "SCI_HAT", img: "./static/images/490/SCI_HAT.png" },
+    SwinIR_KinD: { name: "SwinIR_KinD", img: "./static/images/490/SwinIR_KinD.png" },
+    HAT_KinD: { name: "HAT_KinD", img: "./static/images/490/HAT_KinD.png" },
+    MaIR: { name: "MaIR", img: "./static/images/490/MaIR.png" },
+    MambaIRv2: { name: "MambaIRv2", img: "./static/images/490/Mambairv2.png" },
+    PromptIR: { name: "PromptIR", img: "./static/images/490/PromptIR.png" },
+    OneRestore: { name: "OneRestore", img: "./static/images/490/OneRestore.png" },
+    MoCEIR: { name: "MoCEIR", img: "./static/images/490/MoCEIR.png" },
   };
 
-  const select = document.getElementById("compMethodSelect");
-  const compImg = document.getElementById("compResultImg");
+  const select1 = document.getElementById("compMethodSelect1");
+  const compImg1 = document.getElementById("compResultImg1");
 
-  select.addEventListener("change", function () {
+  select1.addEventListener("change", function () {
     const key = this.value;
     if (!methods[key]) return;
-    compImg.src = methods[key].img;
-    compImg.alt = methods[key].name;
+    compImg1.src = methods[key].img;
+    compImg1.alt = methods[key].name;
+  });
+
+  const select2 = document.getElementById("compMethodSelect2");
+  const compImg2 = document.getElementById("compResultImg2");
+
+  select2.addEventListener("change", function () {
+    const key = this.value;
+    if (!methods[key]) return;
+    compImg2.src = methods[key].img.replace('490', '807');
+    compImg2.alt = methods[key].name;
   });
 </script>
     
