@@ -346,6 +346,7 @@
 
   <div class="methods-compare-wrap">
     <div class="methods-compare">
+      <!-- Left: Ours -->
       <div class="methods-col">
         <div class="method-card">
           <div class="method-name">Ours Methods</div>
@@ -358,12 +359,21 @@
         </div>
       </div>
 
+      <!-- Right: Comparison methods -->
       <div class="methods-col">
         <div class="method-card">
-          <div class="method-name">Comparison Methods</div>
+          <div class="method-head">
+            <div class="method-name">Comparison Methods</div>
+
+            <select id="compMethodSelect" class="method-select">
+              <option value="AdaIR">AdaIR</option>
+              <option value="DRAT">DRAT</option>
+            </select>
+          </div>
+
           <div class="compare-stage" id="comp1" style="--split:50%;">
             <img class="compare-img compare-input" src="./static/images/490/input.png" alt="Input">
-            <img class="compare-img compare-result" src="./static/images/490/AdaIR.png" alt="Comparison">
+            <img class="compare-img compare-result" id="compResultImg" src="./static/images/490/AdaIR.png" alt="Comparison">
             <div class="compare-divider"></div>
             <div class="compare-handle" aria-hidden="true"></div>
           </div>
@@ -407,11 +417,30 @@
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
   }
 
+  .method-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
   .method-name {
     font-size: 15px;
     font-weight: 600;
     color: #333;
-    text-align: center;
+    text-align: left;
+    white-space: nowrap;
+  }
+
+  .method-select {
+    min-width: 140px;
+    padding: 6px 10px;
+    border-radius: 10px;
+    border: 1px solid #d0d7de;
+    background: #fff;
+    font-size: 14px;
+    color: #333;
+    outline: none;
   }
 
   .compare-stage {
@@ -500,6 +529,19 @@
       width: 95%;
       grid-template-columns: 1fr;
     }
+
+    .method-head {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .method-name {
+      text-align: center;
+    }
+
+    .method-select {
+      width: 100%;
+    }
   }
 </style>
 
@@ -536,6 +578,27 @@
   }
 
   ["ours1", "comp1"].forEach(bindCompare);
+
+  const methods = {
+    AdaIR: {
+      name: "AdaIR",
+      img: "./static/images/490/AdaIR.png"
+    },
+    DRAT: {
+      name: "DRAT",
+      img: "./static/images/490/DART.png"
+    },
+  };
+
+  const select = document.getElementById("compMethodSelect");
+  const compImg = document.getElementById("compResultImg");
+
+  select.addEventListener("change", function () {
+    const key = this.value;
+    if (!methods[key]) return;
+    compImg.src = methods[key].img;
+    compImg.alt = methods[key].name;
+  });
 </script>
     
   <footer class="footer">
