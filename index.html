@@ -342,37 +342,32 @@
 
 <!-- Methods compare -->
 <section class="section hero is-light">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Methods Comparison</h2>
+  <h2 class="title is-3 has-text-centered">Methods Comparison</h2>
 
-        <div class="methods-compare">
-          <div class="methods-col">
-            <div class="method-card">
-              <div class="method-name">Ours Methods</div>
-              <div class="compare-stage" id="ours1" style="--split:50%;">
-                <img class="compare-img compare-input" src="./static/images/490/input.png" alt="Input">
-                <img class="compare-img compare-result" src="./static/images/490/Ours.png" alt="Ours">
-                <div class="compare-divider"></div>
-                <div class="compare-handle" aria-hidden="true"></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="methods-col">
-            <div class="method-card">
-              <div class="method-name">Comparison Methods</div>
-              <div class="compare-stage" id="comp1" style="--split:50%;">
-                <img class="compare-img compare-input" src="./static/images/490/input.png" alt="Input">
-                <img class="compare-img compare-result" src="./static/images/490/AdaIR.png" alt="Comparison">
-                <div class="compare-divider"></div>
-                <div class="compare-handle" aria-hidden="true"></div>
-              </div>
-            </div>
+  <div class="methods-compare-wrap">
+    <div class="methods-compare">
+      <div class="methods-col">
+        <div class="method-card">
+          <div class="method-name">Ours Methods</div>
+          <div class="compare-stage" id="ours1" style="--split:50%;">
+            <img class="compare-img compare-input" src="./static/images/490/input.png" alt="Input">
+            <img class="compare-img compare-result" src="./static/images/490/Ours.png" alt="Ours">
+            <div class="compare-divider"></div>
+            <div class="compare-handle" aria-hidden="true"></div>
           </div>
         </div>
+      </div>
 
+      <div class="methods-col">
+        <div class="method-card">
+          <div class="method-name">Comparison Methods</div>
+          <div class="compare-stage" id="comp1" style="--split:50%;">
+            <img class="compare-img compare-input" src="./static/images/490/input.png" alt="Input">
+            <img class="compare-img compare-result" src="./static/images/490/AdaIR.png" alt="Comparison">
+            <div class="compare-divider"></div>
+            <div class="compare-handle" aria-hidden="true"></div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -380,13 +375,19 @@
 <!-- End methods compare -->
 
 <style>
+  .methods-compare-wrap {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
   .methods-compare {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 24px;
-    width: 100%;
-    max-width: 1100px;
-    margin: 0 auto;
+    width: 65%;
+    max-width: 1200px;
+    margin: 0;
     align-items: start;
   }
 
@@ -496,6 +497,7 @@
 
   @media (max-width: 900px) {
     .methods-compare {
+      width: 95%;
       grid-template-columns: 1fr;
     }
   }
