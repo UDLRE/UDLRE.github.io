@@ -340,13 +340,10 @@
 </section>
 <!-- End paper abstract -->
 
-<div class="compare-wrap" id="compare1">
-  <div class="compare-stage">
-    <img class="compare-img compare-img-base" src="./static/images/490/input.png" alt="Input">
-
-    <div class="compare-overlay">
-      <img class="compare-img" src="./static/images/490/Ours.png" alt="Result">
-    </div>
+<div class="compare-wrap">
+  <div class="compare-stage" id="compare1" style="--split:50%;">
+    <img class="compare-img compare-input" src="./static/images/490/input.png" alt="Input">
+    <img class="compare-img compare-result" src="./static/images/490/Ours.png" alt="Result">
 
     <div class="compare-divider"></div>
     <div class="compare-handle" aria-hidden="true"></div>
@@ -372,6 +369,7 @@
     border-radius: 12px;
     background: #111;
     cursor: ew-resize;
+    --split: 50%;
   }
 
   .compare-img {
@@ -385,27 +383,21 @@
     user-select: none;
   }
 
-  .compare-img-base {
+  .compare-input {
     z-index: 1;
+    clip-path: inset(0 calc(100% - var(--split)) 0 0);
   }
 
-  .compare-overlay {
-    position: absolute;
-    inset: 0;
-    width: 50%;
-    overflow: hidden;
+  .compare-result {
     z-index: 2;
-  }
-
-  .compare-overlay .compare-img {
-    inset: 0;
+    clip-path: inset(0 0 0 var(--split));
   }
 
   .compare-divider {
     position: absolute;
     top: 0;
     bottom: 0;
-    left: 50%;
+    left: var(--split);
     width: 2px;
     transform: translateX(-1px);
     background: rgba(255, 255, 255, 0.9);
@@ -416,7 +408,7 @@
   .compare-handle {
     position: absolute;
     top: 50%;
-    left: 50%;
+    left: var(--split);
     width: 34px;
     height: 34px;
     transform: translate(-50%, -50%);
@@ -473,37 +465,25 @@
 
 <script>
   (function () {
-    const wrap = document.getElementById("compare1");
-    const stage = wrap.querySelector(".compare-stage");
-    const overlay = wrap.querySelector(".compare-overlay");
-    const divider = wrap.querySelector(".compare-divider");
-    const handle = wrap.querySelector(".compare-handle");
-
+    const stage = document.getElementById("compare1");
     let dragging = false;
-    let pos = 50;
 
-    function update(percent) {
-      pos = Math.max(0, Math.min(100, percent));
-      overlay.style.width = pos + "%";
-      divider.style.left = pos + "%";
-      handle.style.left = pos + "%";
-    }
-
-    function setFromClientX(clientX) {
+    function update(clientX) {
       const rect = stage.getBoundingClientRect();
-      const percent = ((clientX - rect.left) / rect.width) * 100;
-      update(percent);
+      let percent = ((clientX - rect.left) / rect.width) * 100;
+      percent = Math.max(0, Math.min(100, percent));
+      stage.style.setProperty("--split", percent + "%");
     }
 
     stage.addEventListener("pointerdown", (e) => {
       dragging = true;
       stage.setPointerCapture(e.pointerId);
-      setFromClientX(e.clientX);
+      update(e.clientX);
     });
 
     stage.addEventListener("pointermove", (e) => {
       if (!dragging) return;
-      setFromClientX(e.clientX);
+      update(e.clientX);
     });
 
     stage.addEventListener("pointerup", () => {
@@ -513,8 +493,6 @@
     stage.addEventListener("pointercancel", () => {
       dragging = false;
     });
-
-    update(50);
   })();
 </script>
     
