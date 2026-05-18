@@ -340,25 +340,104 @@
 </section>
 <!-- End paper abstract -->
 
-<div class="compare-wrap">
-  <div class="compare-stage" id="compare1" style="--split:50%;">
-    <img class="compare-img compare-input" src="./static/images/490/input.png" alt="Input">
-    <img class="compare-img compare-result" src="./static/images/490/Ours.png" alt="Result">
+<div class="methods-compare">
+  <div class="methods-col">
+    <div class="methods-title ours">Ours Methods</div>
 
-    <div class="compare-divider"></div>
-    <div class="compare-handle" aria-hidden="true"></div>
+    <div class="method-card">
+      <div class="method-name">Method A</div>
+      <div class="compare-stage" id="ours1" style="--split:50%;">
+        <img class="compare-img compare-input" src="./static/images/000/00000000.png" alt="Input">
+        <img class="compare-img compare-result" src="./static/images/000/00000000_MAX_4.png" alt="Ours">
+        <div class="compare-divider"></div>
+        <div class="compare-handle" aria-hidden="true"></div>
+      </div>
+    </div>
 
-    <div class="compare-badge compare-badge-left">Input</div>
-    <div class="compare-badge compare-badge-right">Result</div>
+    <div class="method-card">
+      <div class="method-name">Method B</div>
+      <div class="compare-stage" id="ours2" style="--split:50%;">
+        <img class="compare-img compare-input" src="./static/images/011/00000099.png" alt="Input">
+        <img class="compare-img compare-result" src="./static/images/011/00000099_MAX_4.png" alt="Ours">
+        <div class="compare-divider"></div>
+        <div class="compare-handle" aria-hidden="true"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="methods-col">
+    <div class="methods-title comp">Comparison Methods</div>
+
+    <div class="method-card">
+      <div class="method-name">Method A</div>
+      <div class="compare-stage" id="comp1" style="--split:50%;">
+        <img class="compare-img compare-input" src="./static/images/000/00000000.png" alt="Input">
+        <img class="compare-img compare-result" src="./static/images/000/00000000_MAX_4.png" alt="Comparison">
+        <div class="compare-divider"></div>
+        <div class="compare-handle" aria-hidden="true"></div>
+      </div>
+    </div>
+
+    <div class="method-card">
+      <div class="method-name">Method B</div>
+      <div class="compare-stage" id="comp2" style="--split:50%;">
+        <img class="compare-img compare-input" src="./static/images/011/00000099.png" alt="Input">
+        <img class="compare-img compare-result" src="./static/images/011/00000099_MAX_4.png" alt="Comparison">
+        <div class="compare-divider"></div>
+        <div class="compare-handle" aria-hidden="true"></div>
+      </div>
+    </div>
   </div>
 </div>
 
 <style>
-  .compare-wrap {
+  .methods-compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
     width: 100%;
-    max-width: 900px;
-    margin: 0 auto;
-    user-select: none;
+    align-items: start;
+  }
+
+  .methods-col {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .methods-title {
+    font-size: 22px;
+    font-weight: 700;
+    text-align: center;
+    padding: 12px 16px;
+    border-radius: 14px;
+    color: #fff;
+    letter-spacing: 0.5px;
+  }
+
+  .methods-title.ours {
+    background: linear-gradient(135deg, #2b6cff, #6aa6ff);
+  }
+
+  .methods-title.comp {
+    background: linear-gradient(135deg, #6b7280, #9ca3af);
+  }
+
+  .method-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px;
+    border-radius: 16px;
+    background: #f8f9fb;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  }
+
+  .method-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: #333;
+    text-align: center;
   }
 
   .compare-stage {
@@ -369,6 +448,7 @@
     border-radius: 12px;
     background: #111;
     cursor: ew-resize;
+    user-select: none;
     --split: 50%;
   }
 
@@ -400,7 +480,7 @@
     left: var(--split);
     width: 2px;
     transform: translateX(-1px);
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.95);
     z-index: 3;
     pointer-events: none;
   }
@@ -413,7 +493,7 @@
     height: 34px;
     transform: translate(-50%, -50%);
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.96);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
     z-index: 4;
     pointer-events: none;
@@ -441,31 +521,16 @@
     transform: translateY(-50%) rotate(45deg);
   }
 
-  .compare-badge {
-    position: absolute;
-    top: 14px;
-    z-index: 5;
-    padding: 6px 10px;
-    border-radius: 999px;
-    background: rgba(0, 0, 0, 0.55);
-    color: #fff;
-    font-size: 14px;
-    line-height: 1;
-    pointer-events: none;
-  }
-
-  .compare-badge-left {
-    left: 14px;
-  }
-
-  .compare-badge-right {
-    right: 14px;
+  @media (max-width: 900px) {
+    .methods-compare {
+      grid-template-columns: 1fr;
+    }
   }
 </style>
 
 <script>
-  (function () {
-    const stage = document.getElementById("compare1");
+  function bindCompare(id) {
+    const stage = document.getElementById(id);
     let dragging = false;
 
     function update(clientX) {
@@ -493,7 +558,9 @@
     stage.addEventListener("pointercancel", () => {
       dragging = false;
     });
-  })();
+  }
+
+  ["ours1", "ours2", "comp1", "comp2"].forEach(bindCompare);
 </script>
     
   <footer class="footer">
