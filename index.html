@@ -462,17 +462,20 @@
         <th rowspan="2" class="border-double-bottom">Types</th>
         <th rowspan="2" class="border-double-bottom">Methods</th>
         <th colspan="2">Parameters↓</th>
-        <th colspan="5">x2</th>
-        <th colspan="5">x4</th>
+        <th colspan="5">×2</th>
+        <th colspan="5">×4</th>
       </tr>
+
       <tr>
-        <th class="border-double-bottom">x2</th>
-        <th class="border-double-bottom">x4</th>
+        <th class="border-double-bottom">×2</th>
+        <th class="border-double-bottom">×4</th>
+
         <th class="border-double-bottom">PSNR↑</th>
         <th class="border-double-bottom">SSIM↑</th>
         <th class="border-double-bottom">LPIPS↓</th>
         <th class="border-double-bottom">RMSE↓</th>
         <th class="border-double-bottom">FSIM↑</th>
+
         <th class="border-double-bottom">PSNR↑</th>
         <th class="border-double-bottom">SSIM↑</th>
         <th class="border-double-bottom">LPIPS↓</th>
@@ -480,308 +483,405 @@
         <th class="border-double-bottom">FSIM↑</th>
       </tr>
     </thead>
+
     <tbody>
+
+      <!-- ======================= -->
+      <!-- Direct transfer -->
+      <!-- ======================= -->
+
       <tr>
-        <td colspan="14" class="section-title">Direct transfer of natural-illumination SR models</td>
+        <td colspan="14" class="section-title">
+          Direct transfer of natural-illumination SR models
+        </td>
       </tr>
+
       <tr>
         <td rowspan="3">SR</td>
         <td>MaIR*</td>
         <td>15.60</td>
         <td>15.74</td>
+
         <td>20.8713</td>
         <td>0.6902</td>
         <td>0.4933</td>
         <td>0.1410</td>
         <td>0.7201</td>
+
         <td>19.7331</td>
         <td>0.7325</td>
         <td>0.5834</td>
         <td>0.3116</td>
         <td>0.7941</td>
       </tr>
+
       <tr>
         <td>MambaIRv2*</td>
         <td>21.17</td>
         <td>21.32</td>
+
         <td>20.1312</td>
         <td>0.6811</td>
         <td>0.5006</td>
         <td>0.1502</td>
         <td>0.7121</td>
+
         <td>18.3656</td>
         <td>0.6521</td>
         <td>0.6224</td>
         <td>0.3318</td>
         <td>0.7846</td>
       </tr>
-      <tr>
+
+      <tr class="border-single-bottom">
         <td>DRAT*</td>
         <td>8.25</td>
         <td>8.40</td>
+
         <td>21.1401</td>
         <td>0.6912</td>
         <td>0.4802</td>
         <td>0.1311</td>
         <td>0.7103</td>
+
         <td>19.6303</td>
         <td>0.7104</td>
         <td>0.5556</td>
         <td>0.2223</td>
         <td>0.8814</td>
       </tr>
+
+      <!-- ======================= -->
+      <!-- Cascading pipelines -->
+      <!-- ======================= -->
+
       <tr>
-        <td colspan="14" class="section-title">Cascading pipelines</td>
+        <td colspan="14" class="section-title">
+          Cascading pipelines
+        </td>
       </tr>
+
+      <!-- SR+LLE -->
       <tr>
         <td rowspan="4">SR+LLE</td>
-        <td>SwinIR +KinD</td>
+
+        <td>SwinIR + KinD</td>
         <td>20.34</td>
         <td>20.44</td>
+
         <td>17.8583</td>
         <td>0.6433</td>
         <td>0.5016</td>
         <td>0.1501</td>
         <td>0.6985</td>
+
         <td>17.4292</td>
         <td>0.6867</td>
         <td>0.5822</td>
         <td>0.3315</td>
         <td>0.7233</td>
       </tr>
+
       <tr>
-        <td>HAT+KinD</td>
+        <td>HAT + KinD</td>
         <td>29.19</td>
         <td>29.34</td>
+
         <td>16.4817</td>
         <td>0.6516</td>
         <td>0.5565</td>
         <td>0.1645</td>
         <td>0.7918</td>
+
         <td>16.0395</td>
         <td>0.6219</td>
         <td>0.6273</td>
         <td>0.1735</td>
         <td>0.7752</td>
       </tr>
+
       <tr>
-        <td>HAT+Zero-DCE</td>
+        <td>HAT + Zero-DCE</td>
         <td>20.72</td>
         <td>20.87</td>
+
         <td>15.2673</td>
         <td>0.6008</td>
         <td>0.5488</td>
         <td>0.2017</td>
         <td>0.7974</td>
+
         <td>14.6597</td>
         <td>0.5800</td>
         <td>0.6138</td>
         <td>0.2155</td>
         <td>0.7829</td>
       </tr>
-      <tr>
-        <td>HAT+SCI</td>
+
+      <tr class="border-single-bottom">
+        <td>HAT + SCI</td>
         <td>20.39</td>
         <td>20.54</td>
+
         <td>15.5241</td>
         <td>0.6285</td>
         <td>0.5235</td>
         <td>0.1453</td>
         <td>0.7013</td>
+
         <td>14.9063</td>
         <td>0.6502</td>
         <td>0.5674</td>
         <td>0.3312</td>
         <td>0.6993</td>
       </tr>
+
+      <!-- LLE+SR -->
+
       <tr>
         <td rowspan="4">LLE+SR</td>
-        <td>KinD+SwinIR</td>
+
+        <td>KinD + SwinIR</td>
         <td>20.34</td>
         <td>20.44</td>
+
         <td>17.8752</td>
         <td>0.6702</td>
         <td>0.5010</td>
         <td>0.1486</td>
         <td>0.7066</td>
+
         <td>17.5125</td>
         <td>0.7145</td>
         <td>0.5899</td>
         <td>0.3423</td>
         <td>0.7121</td>
       </tr>
+
       <tr>
-        <td>KinD+HAT</td>
+        <td>KinD + HAT</td>
         <td>29.19</td>
         <td>29.34</td>
+
         <td>16.5125</td>
         <td>0.6714</td>
         <td>0.5347</td>
         <td>0.1634</td>
         <td>0.7974</td>
+
         <td>16.1487</td>
         <td>0.6638</td>
         <td>0.5977</td>
         <td>0.1711</td>
         <td>0.7924</td>
       </tr>
+
       <tr>
-        <td>Zero-DCE+HAT</td>
+        <td>Zero-DCE + HAT</td>
         <td>20.72</td>
         <td>20.87</td>
+
         <td>15.1728</td>
         <td>0.6031</td>
         <td>0.5607</td>
         <td>0.2037</td>
         <td>0.8012</td>
+
         <td>14.5055</td>
         <td>0.5835</td>
         <td>0.6164</td>
         <td>0.2192</td>
         <td>0.7909</td>
       </tr>
-      <tr>
-        <td>SCI+HAT</td>
+
+      <tr class="border-single-bottom">
+        <td>SCI + HAT</td>
         <td>20.39</td>
         <td>20.54</td>
+
         <td>15.5049</td>
         <td>0.6151</td>
         <td>0.5323</td>
         <td>0.1523</td>
         <td>0.6835</td>
+
         <td>14.8845</td>
         <td>0.6384</td>
         <td>0.5693</td>
         <td>0.3421</td>
         <td>0.6897</td>
       </tr>
+
+      <!-- ======================= -->
+      <!-- All in One -->
+      <!-- ======================= -->
+
       <tr>
-        <td colspan="14" class="section-title">All-in-One</td>
+        <td colspan="14" class="section-title">
+          All-in-One
+        </td>
       </tr>
+
+      <!-- One-to-One -->
+
       <tr>
         <td rowspan="3">One-to-One</td>
+
         <td>AdaptIR*</td>
         <td>11.68</td>
         <td>11.80</td>
+
         <td>20.2931</td>
         <td>0.6723</td>
         <td>0.6521</td>
         <td>0.1431</td>
         <td>0.5611</td>
+
         <td>19.4536</td>
         <td>0.6335</td>
         <td>0.6817</td>
         <td>0.1663</td>
         <td>0.7632</td>
       </tr>
+
       <tr>
         <td>Restormer*</td>
         <td>26.12</td>
         <td>26.23</td>
+
         <td>21.2113</td>
         <td>0.7217</td>
         <td><span class="second-best">0.3829</span></td>
         <td>0.0981</td>
         <td><span class="second-best">0.8925</span></td>
+
         <td>20.2968</td>
         <td>0.7228</td>
         <td>0.4936</td>
         <td>0.1019</td>
         <td><span class="second-best">0.8816</span></td>
       </tr>
-      <tr>
+
+      <tr class="border-single-bottom">
         <td>MIRNet*</td>
         <td>31.79</td>
         <td>31.79</td>
+
         <td>21.0502</td>
         <td>0.7242</td>
         <td>0.4332</td>
         <td>0.0974</td>
         <td>0.8818</td>
+
         <td>19.7852</td>
         <td>0.7339</td>
         <td>0.5953</td>
         <td><span class="second-best">0.1006</span></td>
         <td>0.8793</td>
       </tr>
+
+      <!-- One-to-Many -->
+
       <tr>
         <td rowspan="2">One-to-Many</td>
+
         <td>PromptIR*</td>
         <td>33.17</td>
         <td>33.32</td>
+
         <td>20.8637</td>
         <td>0.7909</td>
         <td>0.3954</td>
         <td>0.1044</td>
         <td>0.8761</td>
+
         <td>19.5195</td>
         <td>0.7654</td>
         <td>0.4794</td>
         <td>0.1209</td>
         <td>0.8639</td>
       </tr>
-      <tr>
-        <td>AdalR*</td>
+
+      <tr class="border-single-bottom">
+        <td>AdaIR*</td>
         <td>28.94</td>
         <td>29.09</td>
+
         <td><span class="second-best">21.4945</span></td>
         <td>0.7923</td>
         <td>0.3971</td>
         <td><span class="second-best">0.0972</span></td>
         <td>0.8799</td>
+
         <td>20.0069</td>
         <td>0.7640</td>
         <td>0.5147</td>
         <td>0.1152</td>
         <td>0.8619</td>
       </tr>
+
+      <!-- One-to-Composite -->
+
       <tr>
         <td rowspan="2">One-to-Composite</td>
+
         <td>OneRestore*</td>
         <td><span class="second-best">6.06</span></td>
         <td><span class="second-best">6.31</span></td>
+
         <td>21.4343</td>
         <td><span class="second-best">0.7951</span></td>
         <td>0.3891</td>
         <td>0.0989</td>
         <td>0.8616</td>
+
         <td>19.1589</td>
         <td>0.6952</td>
         <td>0.5106</td>
         <td>0.1174</td>
         <td>0.8446</td>
       </tr>
+
       <tr class="border-single-bottom">
         <td>MoCE-IR*</td>
         <td>24.11</td>
         <td>24.26</td>
+
         <td>20.2200</td>
         <td>0.7687</td>
         <td>0.4251</td>
         <td>0.1132</td>
         <td>0.8701</td>
+
         <td>19.9067</td>
         <td>0.7800</td>
         <td><span class="second-best">0.4785</span></td>
         <td>0.1166</td>
         <td>0.8685</td>
       </tr>
+
+      <!-- Ours -->
+
       <tr class="ours-row">
-        <td><strong>Ours</strong></td>
-        <td><strong>UDLRE</strong></td>
-        <td><strong><span class="best">4.36</span></strong></td>
-        <td><strong><span class="best">4.41</span></strong></td>
-        <td><strong><span class="best">23.0682</span></strong></td>
-        <td><strong><span class="best">0.7995</span></strong></td>
-        <td><strong><span class="best">0.3829</span></strong></td>
-        <td><strong><span class="best">0.0964</span></strong></td>
-        <td><strong><span class="best">0.8939</span></strong></td>
-        <td><strong><span class="best">21.9320</span></strong></td>
-        <td><strong><span class="best">0.8014</span></strong></td>
-        <td><strong><span class="best">0.4616</span></strong></td>
-        <td><strong><span class="best">0.1000</span></strong></td>
-        <td><strong><span class="best">0.8822</span></strong></td>
+        <td><b>Ours</b></td>
+        <td><b>UDLRE</b></td>
+
+        <td><span class="best">4.36</span></td>
+        <td><span class="best">4.41</span></td>
+
+        <td><span class="best">23.0682</span></td>
+        <td><span class="best">0.7995</span></td>
+        <td><span class="best">0.3829</span></td>
+        <td><span class="best">0.0964</span></td>
+        <td><span class="best">0.8939</span></td>
+
+        <td><span class="best">21.9320</span></td>
+        <td><span class="best">0.8014</span></td>
+        <td><span class="best">0.4616</span></td>
+        <td><span class="best">0.1000</span></td>
+        <td><span class="best">0.8822</span></td>
       </tr>
+
     </tbody>
   </table>
 </div>
