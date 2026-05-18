@@ -482,7 +482,7 @@
     overflow: hidden;
     border-radius: 12px;
     background: #111;
-    cursor: ew-resize;
+    cursor: default;
     user-select: none;
     --split: 50%;
   }
@@ -524,14 +524,22 @@
     position: absolute;
     top: 50%;
     left: var(--split);
+  
     width: 34px;
     height: 34px;
+  
     transform: translate(-50%, -50%);
     border-radius: 50%;
+  
     background: rgba(255, 255, 255, 0.96);
+  
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+  
     z-index: 4;
-    pointer-events: none;
+  
+    cursor: ew-resize;
+  
+    pointer-events: auto;
   }
 
   .compare-handle::before,
@@ -580,31 +588,39 @@
 <script>
   function bindCompare(id) {
     const stage = document.getElementById(id);
+    const handle = stage.querySelector(".compare-handle");
+
     let dragging = false;
 
     function update(clientX) {
       const rect = stage.getBoundingClientRect();
+
       let percent = ((clientX - rect.left) / rect.width) * 100;
       percent = Math.max(0, Math.min(100, percent));
+
       stage.style.setProperty("--split", percent + "%");
     }
 
-    stage.addEventListener("pointerdown", (e) => {
+    /* 只有拖动圆球才会触发 */
+    handle.addEventListener("pointerdown", (e) => {
       dragging = true;
-      stage.setPointerCapture(e.pointerId);
-      update(e.clientX);
+
+      handle.setPointerCapture(e.pointerId);
+
+      e.stopPropagation();
+      e.preventDefault();
     });
 
-    stage.addEventListener("pointermove", (e) => {
+    window.addEventListener("pointermove", (e) => {
       if (!dragging) return;
       update(e.clientX);
     });
 
-    stage.addEventListener("pointerup", () => {
+    window.addEventListener("pointerup", () => {
       dragging = false;
     });
 
-    stage.addEventListener("pointercancel", () => {
+    window.addEventListener("pointercancel", () => {
       dragging = false;
     });
   }
@@ -638,7 +654,7 @@
     },
     MambaIRv2: {
       name: "MambaIRv2",
-      img: "./static/images/490/MambaIRv2.png"
+      img: "./static/images/490/Mambairv2.png"
     },
     PromptIR: {
       name: "PromptIR",
